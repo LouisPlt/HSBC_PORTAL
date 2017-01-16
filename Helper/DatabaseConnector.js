@@ -3,7 +3,7 @@ require('dotenv').config();
 
 var cn = {
   host: process.env.DB_HOST,
-  databse: process.env.DB_NAME,
+  database: process.env.DB_NAME,
   user: process.env.DB_USER,
   port: process.env.DB_PORT,
   password: process.env.DB_PASSWORD,

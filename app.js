@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 
 var connexion = require('./routes/connexion');
+var alexaLogin = require('./routes/alexaLogin');
 var inscription = require('./routes/inscription');
 var deconnexion = require('./routes/deconnexion');
 var compte = require('./routes/compte');
@@ -31,7 +32,7 @@ app.use('/', connexion);
 app.use('/connexion', connexion);
 app.use('/inscription', inscription);
 app.use('/deconnexion', deconnexion);
-
+app.use('/login', alexaLogin);
 app.use('/compte', compte);
 
 // catch 404 and forward to error handler

@@ -4,19 +4,24 @@ var router = express.Router();
 var dbConnector = require('../Helper/DatabaseConnector');
 var db = dbConnector.connection;
 var sess;
+var state;
+var client_id;
+var redirect_uri;
 
 
 router.get('/', function(req, res, next) {
-	res.render('connexion', {connected : true});
+	state = req.query.state;
+	client_id = req.query.client_id;
+	redirect_uri = req.query.redirect_uri
+	console.log(redirect_uri);
+	res.render('AlexaLogin', {connected : true});
 });
 
 
 router.post('/', function(req, res, next) {
-
 	sess = req.session;
 	db.any("select * from clients where Login=$1", req.body.login)
     	.then(function (data) {
-    		console.log(data);
     		//Si le nom d'utilisateur n'existe pas
     		if (isEmptyObject(data)) {							
 				console.log("Nom d'utilisateur inexistant");
@@ -27,9 +32,18 @@ router.post('/', function(req, res, next) {
 					res.render('connexion', {connected : false});
 				} else {
 					console.log("Connecté : " + req.body.login);
-					sess.login = req.body.login;
-					sess.data = data[0];
-					res.redirect('/compte/' + sess.login);
+					var token = generateToken();
+
+					db.none("update clients set Token = $1", [token])
+				    .then(function () {
+				    	var uri = redirect_uri + '/?#state=' + state + '&access_token=' + token + '&token_type=Bearer';
+						console.log(uri);
+						res.redirect(uri);
+				    })
+				    .catch(function (error) {
+				        console.error("Unable to update item. Error JSON:", error);
+						res.render('/connexion', { sess: sess });
+				    });		
 				}
 			}
     	})
@@ -40,8 +54,12 @@ router.post('/', function(req, res, next) {
 });
 
 function isEmptyObject(obj) {
-
 	return !Object.keys(obj).length;
 }
+
+function generateToken() {
+	return require('crypto').randomBytes(64).toString('hex');
+}
+
 
 module.exports = router;

@@ -17,7 +17,7 @@ router.post('/', function(req, res, next) {
 	db.any("select * from clients where Login=$1", req.body.login)
     .then(function (data) {
     	//Si le nom d'utilisateur n'existe pas
-        if (!isEmptyObject(data)) {							
+        if (!isEmptyObject(data)) {
 			console.log("Utilisateur déjà existant");
 			res.render('inscription', { pseudo: true});
 		} else {
@@ -29,7 +29,7 @@ router.post('/', function(req, res, next) {
 				res.redirect('/connexion');
 		    })
 		    .catch(function (error) {
-		        console.log("ERROR:", error.message || error);
+		        console.log("ERROR", error.message || error);
 				res.render('inscription', { field: true});
 		    });
 		}

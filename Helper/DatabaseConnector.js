@@ -1,4 +1,3 @@
-var config = require('../config.json');
 var pgp = require('pg-promise')(/*options*/);
 require('dotenv').config();
 

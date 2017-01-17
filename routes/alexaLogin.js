@@ -33,7 +33,7 @@ router.post('/', function(req, res, next) {
 					console.log("Connecté : " + req.body.login);
 					var token = generateToken();
 
-					db.none("update clients set Token = $1", [token])
+					db.none("update clients set Token = $1 where Login = $2", [token, req.body.login])
 				    .then(function () {
 				    	var uri = redirect_uri + '/?#state=' + state + '&access_token=' + token + '&token_type=Bearer';
 						console.log(uri);

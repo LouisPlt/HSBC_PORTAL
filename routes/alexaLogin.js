@@ -13,8 +13,7 @@ router.get('/', function(req, res, next) {
 	state = req.query.state;
 	client_id = req.query.client_id;
 	redirect_uri = req.query.redirect_uri
-	console.log(redirect_uri);
-	res.render('AlexaLogin', {connected : true});
+	res.render('alexaLogin', {connected : true});
 });
 
 

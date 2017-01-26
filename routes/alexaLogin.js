@@ -3,22 +3,19 @@ var session = require('express-session');
 var router = express.Router();
 var dbConnector = require('../Helper/DatabaseConnector');
 var db = dbConnector.connection;
-var sess;
 var state;
-var client_id;
 var redirect_uri;
 
 
 router.get('/', function(req, res, next) {
 	state = req.query.state;
-	client_id = req.query.client_id;
 	redirect_uri = req.query.redirect_uri
 	res.render('alexaLogin', {connected : true});
 });
 
 
 router.post('/', function(req, res, next) {
-	sess = req.session;
+	var sess = req.session;
 	db.any("select * from clients where Login=$1", req.body.login)
     	.then(function (data) {
     		//Si le nom d'utilisateur n'existe pas

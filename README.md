@@ -8,4 +8,12 @@ Si vous êtes seulement interessé par la fonctionnalité d'account linking avec
 
 # Deployment
 
-Pour utiliser ce code pour l'account linking il doit être déployé. Le plus simple pour tester est de le déployer sur la plateforme Heroku. Pour réaliser cela vous pouvez suivre le tutoriel présent sur [ce repository](https://github.com/LouisPouillot/HSBC_WEBSITE)
+Créer un fork du projet https://github.com/LouisPouillot/HSBC_PORTAL sur votre github
+* Se créer un compte sur https://www.heroku.com/ (avec une adresse mail valide)
+* Une fois le mail vérifié et connecté, cliquez sur Create a new App
+* Choisir un nom pour l’application
+* Pour la méthode de déploiement sélectionner GitHub et connectez vous sur Github et autorisez les accès si nécessaire
+* Une fois le compte heroku lié à Github sélectionné le repo que vous avez fork
+* Déployez la branche master
+
+Pour accéder l'url de la page de login est: https://{app-name}.herokuapp.com/login

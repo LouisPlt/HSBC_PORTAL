@@ -1,4 +1,4 @@
-# HSBC_WEBSITE
+# HSBC_PORTAL
 
 Ce site est utilisé pour gérer des utilisateurs (on simule un site HSBC de façon très simpliste). Il permet de s'enregistrer et de se connecter pour consulter son profil ou modifier certaines informations. De plus, il permet de répondre à des requêtes venant de l'écosysteme Alexa et de lier un skill (une application tournant sur un Amazon Echo) à un compte HSBC.
 
